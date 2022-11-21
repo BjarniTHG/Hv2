@@ -1,16 +1,30 @@
 :root {
-  font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
-  font-size: 16px;
-  line-height: 24px;
-  font-weight: 400;
-
+  --font-family-headings: "Lobster";
+  --font-family-base: "Exo", system-ui;
+  background-color: #212020;
+  color: white;
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
+  font-size: 16px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  -webkit-text-size-adjust: 100%;
+  font-synthesis: none;
+  font-weight: 400;
+  line-height: 24px;
+  text-rendering: optimizelegibility;
+  text-size-adjust: 100%;
 }
+
+@font-face {
+  font-display: swap;
+  font-family: Lobster;
+  font-style: normal;
+  src: url("./fonts/Lobster-Regular.ttf") format("woff");
+}
+@font-face {
+  font-display: swap;
+  font-family: Exo;
+  font-style: normal;
+  src: url("./fonts/Exo.ttf") format("woff");
+}
+
+/*# sourceMappingURL=style.css.map */
