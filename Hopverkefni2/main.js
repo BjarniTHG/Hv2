@@ -1,9 +1,14 @@
 import './style.css';
 import { empty } from './scripts/helpers';
+import {
+  createSearchInput,
+  fetchAndRenderEvents,
+  renderFrontpage,
+  searchAndRender,
+} from './scripts/ui';
 
 const header = document.querySelector('.layout__header');
 const main = document.querySelector('.layout__main');
-
 
 // This commented line below is used to push the initial route
 /* window.history.pushState({}, '', `/?query=${value}`);  */
