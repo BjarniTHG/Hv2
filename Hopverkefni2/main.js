@@ -25,12 +25,15 @@ getData();
 data[i].language.is.title
 data[i].language.is.place
 data[i].language.is.text */
-function savedata(jsonfromfile) {
+async function savedata(jsonfromfile) {
   const data = jsonfromfile;
   console.log(data);
   for (let i = 0; i < data.length; i++) {
     main.append(el('p', {}, data[i].language.is.title));
-    // append
+    let img = document.createElement("img");
+    let nyMynd = await fetch('https://picsum.photos/300/200');
+    img.src = nyMynd.url;
+    main.append(img);
   }
   
 }
