@@ -21,14 +21,15 @@ async function getData() {
   }
 }
 getData();
-
+/*
+data[i].language.is.title
+data[i].language.is.place
+data[i].language.is.text */
 function savedata(jsonfromfile) {
   const data = jsonfromfile;
   console.log(data);
   for (let i = 0; i < data.length; i++) {
     main.append(el('p', {}, data[i].language.is.title));
-    main.append(el('p', {}, data[i].language.is.place));
-    main.append(el('p', {}, data[i].language.is.text));
     // append
   }
   
