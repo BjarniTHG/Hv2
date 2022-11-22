@@ -43,4 +43,12 @@ body {
   margin-right: 8px;
 }
 
+.layout__header p{
+  margin-left: 8px;
+  margin-right: 8px;
+  color:navy;
+  font-family: Exo;
+  font-weight: bold;
+}
+
 /*# sourceMappingURL=style.css.map */
