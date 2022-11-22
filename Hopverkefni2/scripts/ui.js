@@ -55,23 +55,24 @@ export async function fetchAndRenderEvents(main, searchForm, id) {
   main.appendChild(createEvents(events));
 }
 
-/**
- * Sækir leitarniðurstöður og birtir þær.
- * @param {element} main Element sem á að birta leitarniðurstöður í.
- * @param {element} button Leitarform sem á að gera óvirkt meðan gögn eru sótt.
- * @param {string} query Leitarstrengur.
- */
-export async function searchAndRender(main, searchForm, query) {
-  const button = searchForm.querySelector('button');
+// /**
+//  * Sækir leitarniðurstöður og birtir þær.
+//  * @param {element} main Element sem á að birta leitarniðurstöður í.
+//  * @param {element} button Leitarform sem á að gera óvirkt meðan gögn eru sótt.
+//  * @param {string} query Leitarstrengur.
+//  */
 
-  setLoading(main, button);
-  const results = await searchEvents(query);
-  setNotLoading(main, button);
+// export async function searchAndRender(main, searchForm, query) {
+//   // const button = searchForm.querySelector('button');
 
-  const resultsEl = createSearchResults(results, query);
+//   // setLoading(main, button);
+//   // const results = await searchEvents(query);
+//   // setNotLoading(main, button);
 
-  main.appendChild(resultsEl);
-}
+//   const resultsEl = createSearchResults(results, query);
+
+//   main.appendChild(resultsEl);
+// }
 
 /**
  * Birtir upplýsingar á forsíðu.

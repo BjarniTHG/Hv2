@@ -5,7 +5,7 @@ import {
   createSearchInput,
   fetchAndRenderEvents,
   renderFrontpage,
-  searchAndRender,
+  // searchAndRender,
 } from './scripts/ui';
 
 const header = document.querySelector('.layout__header');
@@ -29,10 +29,9 @@ async function savedata(jsonfromfile) {
   const data = jsonfromfile;
   console.log(data);
   for (let i = 0; i < data.length; i++) {
-    let img = document.createElement("img");
     let nyMynd = await fetch('https://picsum.photos/300/200');
-    img.src = nyMynd.url;
-    main.append(img);
+    let source = nyMynd.url;
+    main.append(el('a', { href: `/?id=${data[i].id}`,class:'linkhref' }, el('img', {src: source , class: 'imgresponsive'})));
     main.append(el('p', {}, data[i].language.is.title));
     main.append(el('p', {}, data[i].language.is.place));
     main.append(el('p', {}, (data[i].start).slice(11,16) +'-'+(data[i].end).slice(11,16)));
@@ -40,9 +39,6 @@ async function savedata(jsonfromfile) {
   
 }
 
-
-// This commented line below is used to push the initial route
-/* window.history.pushState({}, '', `/?query=${value}`);  */
 
 /**
  * Athugar hvaða síðu við erum á út frá query-string og birtir viðeigandi
@@ -53,11 +49,8 @@ async function savedata(jsonfromfile) {
 function route() {
   const params = new URLSearchParams(window.location.search);
   const id = params.get('id');
-  const query = params.get('query');
   if (id) {
     fetchAndRenderEvents(main, searchForm, id);
-  } else if (query) {
-    searchAndRender(main, searchForm, query);
   } else {
     renderFrontpage(main);
   }
