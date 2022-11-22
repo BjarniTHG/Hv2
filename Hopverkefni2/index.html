@@ -2,12 +2,26 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <link rel="icon" type="png" href="./favicon.png" />
+    <link rel="stylesheet" href="style.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vite App</title>
+    <script type="module" src="/main.js"></script>
   </head>
   <body>
-    <div id="app"></div>
-    <script type="module" src="/main.js"></script>
+    <div class="layout">
+      <header class="layout__header">
+        <h1>Meningarnótt Dagskrá</h1>
+        <div class="headerImage">
+          <img class="headerImage" src="images/menningarnott_is.png" alt="Menningarnott">
+        </div>
+      </header>
+      <main class="layout__main">
+        <!-- hér á ekkert að vera! -->
+      </main>
+      <footer class="layout__footer">
+        Gögn frá <a href="https://menningarnott.is/dagskra">Menningarnott.is</a>.
+      </footer>
+    </div>
   </body>
 </html>
