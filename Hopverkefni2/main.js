@@ -29,11 +29,13 @@ async function savedata(jsonfromfile) {
   const data = jsonfromfile;
   console.log(data);
   for (let i = 0; i < data.length; i++) {
-    main.append(el('p', {}, data[i].language.is.title));
     let img = document.createElement("img");
     let nyMynd = await fetch('https://picsum.photos/300/200');
     img.src = nyMynd.url;
     main.append(img);
+    main.append(el('p', {}, data[i].language.is.title));
+    main.append(el('p', {}, data[i].language.is.place));
+    main.append(el('p', {}, (data[i].start).slice(11,16) +'-'+(data[i].end).slice(11,16)));
   }
   
 }
