@@ -21,10 +21,7 @@ async function getData() {
   }
 }
 getData();
-/*
-data[i].language.is.title
-data[i].language.is.place
-data[i].language.is.text */
+
 function savedata(jsonfromfile) {
   const data = jsonfromfile;
   console.log(data);
