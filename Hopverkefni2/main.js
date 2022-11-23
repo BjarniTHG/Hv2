@@ -1,15 +1,14 @@
 import './style.css';
 import './data/events.json';
-import { empty, el } from './scripts/helpers';
+import { empty} from './scripts/helpers';
 import { fetchAndRenderEvents, renderFrontpage, DisplayAllEvents } from './scripts/ui';
 
 const main = document.querySelector('.layout__main');
 
 export async function savedata(jsonfromfile) {
   const data = jsonfromfile;
-  console.log(data);
   // eslint-disable-next-line no-plusplus
-  DisplayAllEvents(data,main);
+  DisplayAllEvents(data, main);
 }
 
 export async function getdataforonevent() {
@@ -17,7 +16,7 @@ export async function getdataforonevent() {
   try {
     filearray = await fetch('./data/events.json');
   } catch (error) {
-    console.log('error');
+    console.warn('error');
   }
   return filearray.json();
 }
@@ -29,10 +28,9 @@ export async function getData() {
       .then((response) => response.json())
       .then((json) => savedata(json));
   } catch (error) {
-    console.log('error');
+    console.warn('error');
   }
 }
-
 
 /*
 data[i].language.is.title
@@ -49,7 +47,8 @@ async function route() {
   const params = new URLSearchParams(window.location.search);
   const id = params.get('id');
   if (id) {
-    fetchAndRenderEvents(id,main);
+    fetchAndRenderEvents(id, main);
+
     // console.log("your EVENT route is working");
   } else {
     renderFrontpage(main);

@@ -1,4 +1,5 @@
 import { empty, el } from './helpers';
+
 import { getData, getdataforonevent } from '../main';
 
 /**
@@ -6,7 +7,7 @@ import { getData, getdataforonevent } from '../main';
  * @param {function} searchHandler Event handler fyrir leit.
  * @returns Element fyrir leitarform.
  */
-export function createSearchInput(searchHandler) {
+function createSearchInput(searchHandler) {
   const search = el('input', { type: 'search', placeholder: 'Leita' });
   const button = el('button', {}, 'Leita');
 
@@ -15,7 +16,7 @@ export function createSearchInput(searchHandler) {
   return container;
 }
 
-export async function DisplayAllEvents(data, main) {
+async function DisplayAllEvents(data, main) {
   for (let i = 0; i < data.length; i++) {
     const nyMynd = await fetch('https://picsum.photos/300/200');
     const source = nyMynd.url;
@@ -27,10 +28,7 @@ export async function DisplayAllEvents(data, main) {
 }
 
 async function DisplayOneEvent(data, main, id) {
-  // console.log(id);
-  // console.log(data);
-  // console.log(data.length);
-  // console.log(data[0].id);
+  console.log(data[0].location[0]);
   for (let i = 0; i < data.length; i++) {
     if (data[i].id == id) {
       const nyMynd = await fetch('https://picsum.photos/300/200');
@@ -42,6 +40,14 @@ async function DisplayOneEvent(data, main, id) {
       main.append(el('p', {}, `${'Time:  '}${(data[i].start).slice(11, 16)}-${(data[i].end).slice(11, 16)}`));
       main.append(el('p', {}, `${'Stadsetning:  '}${(data[i].language.is.place)}`));
       main.append(el('p', {}, `${'Heimilisfang:  '}${(data[i].formatted_address)}`));
+      const addmap = main.append(el('div', { id: 'map' }));
+      // addmap;
+      const map = L.map('map').setView([data[i].location[0], data[i].location[1]], 15);
+      L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+      }).addTo(map);
+      L.marker([data[i].location[0], data[i].location[1]]).addTo(map);
     }
   }
 }
@@ -51,13 +57,17 @@ async function DisplayOneEvent(data, main, id) {
  * @param {element} button Leitarform sem á að gera óvirkt meðan event er sótt.
  * @param {string} id Auðkenni á event.
  */
-export async function fetchAndRenderEvents(id, main) {
+async function fetchAndRenderEvents(id, main) {
   // console.log("hello from fetchAndRenderEvents");
   empty(main);
   const data = await getdataforonevent();
   DisplayOneEvent(data, main, id);
 }
 
-export async function renderFrontpage(main) {
+async function renderFrontpage(main) {
   main.append(await getData());
 }
+
+export {
+  fetchAndRenderEvents, renderFrontpage, createSearchInput, DisplayAllEvents,
+};
