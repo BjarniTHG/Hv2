@@ -30,7 +30,7 @@ export async function getData() {
   }
 }
 
-getData();
+
 /*
 data[i].language.is.title
 data[i].language.is.place
@@ -46,7 +46,8 @@ function route() {
   const params = new URLSearchParams(window.location.search);
   const id = params.get('id');
   if (id) {
-    fetchAndRenderEvents(id);
+    console.log("found id param");
+    fetchAndRenderEvents(id,main);
     // console.log("your EVENT route is working");
   } else {
     renderFrontpage(main);
