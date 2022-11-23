@@ -1,7 +1,7 @@
 import './style.css';
 import './data/events.json';
 import { empty, el } from './scripts/helpers';
-import { fetchAndRenderEvents, renderFrontpage } from './scripts/ui';
+import { fetchAndRenderEvents, renderFrontpage, DisplayAllEvents } from './scripts/ui';
 
 const main = document.querySelector('.layout__main');
 
@@ -9,14 +9,17 @@ export async function savedata(jsonfromfile) {
   const data = jsonfromfile;
   console.log(data);
   // eslint-disable-next-line no-plusplus
-  for (let i = 0; i < data.length; i++) {
-    const nyMynd = await fetch('https://picsum.photos/300/200');
-    const source = nyMynd.url;
-    main.append(el('a', { href: `/?id=${data[i].id}`, class: 'linkhref' }, el('img', { src: source, class: 'imgresponsive' })));
-    main.append(el('p', {}, data[i].language.is.title));
-    main.append(el('p', {}, data[i].language.is.place));
-    main.append(el('p', {}, `${(data[i].start).slice(11, 16)}-${(data[i].end).slice(11, 16)}`));
+  DisplayAllEvents(data,main);
+}
+
+export async function getdataforonevent() {
+  let filearray;
+  try {
+    filearray = await fetch('./data/events.json');
+  } catch (error) {
+    console.log('error');
   }
+  return filearray.json();
 }
 
 // eslint-disable-next-line import/prefer-default-export
@@ -42,11 +45,10 @@ data[i].language.is.text */
  * birt, annars er forsíða birt.
  */
 
-function route() {
+async function route() {
   const params = new URLSearchParams(window.location.search);
   const id = params.get('id');
   if (id) {
-    console.log("found id param");
     fetchAndRenderEvents(id,main);
     // console.log("your EVENT route is working");
   } else {
@@ -62,6 +64,5 @@ window.onpopstate = () => {
   empty(main);
   route();
 };
-
 // Athugum í byrjun hvað eigi að birta.
 route();
