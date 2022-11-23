@@ -1,48 +1,40 @@
 import './style.css';
 import './data/events.json';
 import { empty, el } from './scripts/helpers';
-import {
-  createSearchInput,
-  fetchAndRenderEvents,
-  renderFrontpage,
-  searchAndRender,
-} from './scripts/ui';
+import { fetchAndRenderEvents, renderFrontpage } from './scripts/ui';
 
-const header = document.querySelector('.layout__header');
 const main = document.querySelector('.layout__main');
 
-async function getData() {
-  try {
-    await fetch('./data/events.json')
-    .then((response) => response.json())
-    .then((json) => savedata(json));
-  } catch (error) {
-    console.log("error");
+export async function savedata(jsonfromfile) {
+  const data = jsonfromfile;
+  console.log(data);
+  // eslint-disable-next-line no-plusplus
+  for (let i = 0; i < data.length; i++) {
+    const nyMynd = await fetch('https://picsum.photos/300/200');
+    const source = nyMynd.url;
+    main.append(el('a', { href: `/?id=${data[i].id}`, class: 'linkhref' }, el('img', { src: source, class: 'imgresponsive' })));
+    main.append(el('p', {}, data[i].language.is.title));
+    main.append(el('p', {}, data[i].language.is.place));
+    main.append(el('p', {}, `${(data[i].start).slice(11, 16)}-${(data[i].end).slice(11, 16)}`));
   }
 }
+
+// eslint-disable-next-line import/prefer-default-export
+export async function getData() {
+  try {
+    await fetch('./data/events.json')
+      .then((response) => response.json())
+      .then((json) => savedata(json));
+  } catch (error) {
+    console.log('error');
+  }
+}
+
 getData();
 /*
 data[i].language.is.title
 data[i].language.is.place
 data[i].language.is.text */
-async function savedata(jsonfromfile) {
-  const data = jsonfromfile;
-  console.log(data);
-  for (let i = 0; i < data.length; i++) {
-    main.append(el('p', {}, data[i].language.is.title));
-    main.append(el('p', {}, data[i].language.is.place));
-    main.append(el('p', {}, data[i].language.is.text));
-    let img = document.createElement("img");
-    let nyMynd = await fetch('https://picsum.photos/300/200');
-    img.src = nyMynd.url;
-    main.append(img);
-  }
-  
-}
-
-
-// This commented line below is used to push the initial route
-/* window.history.pushState({}, '', `/?query=${value}`);  */
 
 /**
  * Athugar hvaða síðu við erum á út frá query-string og birtir viðeigandi
@@ -53,13 +45,12 @@ async function savedata(jsonfromfile) {
 function route() {
   const params = new URLSearchParams(window.location.search);
   const id = params.get('id');
-  const query = params.get('query');
   if (id) {
-    fetchAndRenderEvents(main, searchForm, id);
-  } else if (query) {
-    searchAndRender(main, searchForm, query);
+    fetchAndRenderEvents(id);
+    // console.log("your EVENT route is working");
   } else {
     renderFrontpage(main);
+    // console.log('your MAIN route is working');
   }
 }
 
@@ -72,4 +63,4 @@ window.onpopstate = () => {
 };
 
 // Athugum í byrjun hvað eigi að birta.
-/*route();*/
+route();
