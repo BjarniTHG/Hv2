@@ -12,6 +12,6 @@ module.exports = {
   },
   rules: {
     'linebreak-style': 0,
-    'allowForLoopAfterthoughts': true,
+    allowForLoopAfterthoughts: 0,
   },
 };
