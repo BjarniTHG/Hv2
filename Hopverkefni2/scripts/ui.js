@@ -37,9 +37,11 @@ async function DisplayOneEvent(data, main, id) {
       const source = nyMynd.url;
       main.append(el('a', { }, el('img', { src: source, class: 'clickedimg' })));
       main.append(el('p', {}, data[i].language.is.title));
+      main.append(el('p', {}, data[i].language.is.text));
       main.append(el('p', {}, `${'Date:  '}${(data[i].start.slice(0, 10))}`));
-      main.append(el('p', {}, `${(data[i].start).slice(11, 16)}-${(data[i].end).slice(11, 16)}`));
-      main.append(el('p', {}, `${(data[i].language.is.place)},  ${(data[i].formatted_address)}`));
+      main.append(el('p', {}, `${'Time:  '}${(data[i].start).slice(11, 16)}-${(data[i].end).slice(11, 16)}`));
+      main.append(el('p', {}, `${'Stadsetning:  '}${(data[i].language.is.place)}`));
+      main.append(el('p', {}, `${'Heimilisfang:  '}${(data[i].formatted_address)}`));
     }
   }
 }
