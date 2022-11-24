@@ -1,36 +1,9 @@
 import './style.css';
 import './data/events.json';
-import { empty} from './scripts/helpers';
-import { fetchAndRenderEvents, renderFrontpage, DisplayAllEvents } from './scripts/ui';
+import { empty } from './scripts/helpers';
+import { fetchAndRenderEvents, renderFrontpage } from './scripts/ui';
 
 const main = document.querySelector('.layout__main');
-
-export async function savedata(jsonfromfile) {
-  const data = jsonfromfile;
-  // eslint-disable-next-line no-plusplus
-  DisplayAllEvents(data, main);
-}
-
-export async function getdataforonevent() {
-  let filearray;
-  try {
-    filearray = await fetch('./data/events.json');
-  } catch (error) {
-    console.warn('error');
-  }
-  return filearray.json();
-}
-
-// eslint-disable-next-line import/prefer-default-export
-export async function getData() {
-  try {
-    await fetch('./data/events.json')
-      .then((response) => response.json())
-      .then((json) => savedata(json));
-  } catch (error) {
-    console.warn('error');
-  }
-}
 
 /*
 data[i].language.is.title

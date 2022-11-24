@@ -1,25 +1,26 @@
-import { empty, el } from './helpers';
+import {
+  empty, el, byName, byBirthday, byDate, byId,
+} from './helpers';
 
-import { getData, getdataforonevent } from '../main';
+async function getData() {
+  let filearray;
+  try {
+    filearray = await fetch('./data/events.json');
+  } catch (error) {
+    console.warn('error');
+  }
+  return filearray.json();
+}
 
-/**
- * Útbýr leitarform og skilar elementi.
- * @param {function} searchHandler Event handler fyrir leit.
- * @returns Element fyrir leitarform.
- */
-function createSearchInput(searchHandler) {
-  const search = el('input', { type: 'search', placeholder: 'Leita' });
-  const button = el('button', {}, 'Leita');
-
-  const container = el('form', { class: 'search' }, search, button);
-  container.addEventListener('submit', searchHandler);
-  return container;
+async function getImage() {
+  const nyMynd = await fetch('https://picsum.photos/300/200');
+  const source = nyMynd.url;
+  return source;
 }
 
 async function DisplayAllEvents(data, main) {
   for (let i = 0; i < data.length; i++) {
-    const nyMynd = await fetch('https://picsum.photos/300/200');
-    const source = nyMynd.url;
+    const source = await getImage();
     main.append(el('a', { href: `/?id=${data[i].id}`, class: 'linkhref' }, el('img', { src: source, class: 'imgresponsive' })));
     main.append(el('p', {}, data[i].language.is.title));
     main.append(el('p', {}, data[i].language.is.place));
@@ -30,9 +31,8 @@ async function DisplayAllEvents(data, main) {
 async function DisplayOneEvent(data, main, id) {
   console.log(data[0].location[0]);
   for (let i = 0; i < data.length; i++) {
+    const source = await getImage();
     if (data[i].id == id) {
-      const nyMynd = await fetch('https://picsum.photos/300/200');
-      const source = nyMynd.url;
       main.append(el('a', { }, el('img', { src: source, class: 'clickedimg' })));
       main.append(el('p', {}, data[i].language.is.title));
       main.append(el('p', {}, data[i].language.is.text));
@@ -60,14 +60,35 @@ async function DisplayOneEvent(data, main, id) {
 async function fetchAndRenderEvents(id, main) {
   // console.log("hello from fetchAndRenderEvents");
   empty(main);
-  const data = await getdataforonevent();
+  const data = await getData();
   DisplayOneEvent(data, main, id);
+}
+const sortbuttons = document.querySelector('.sortbuttons');
+
+function addSortbuttons(div) {
+  div.append(el('button', { class: 'sortbutton', id: 'sortbyname' }, 'Raða eftir nafni'));
+  div.append(el('button', { class: 'sortbutton', id: 'sortbydate' }, 'Raða eftri dagsetningu'));
+  div.append(el('button', { class: 'sortbutton', id: 'sortbybirthday' }, 'Raða eftir fæðingardag'));
 }
 
 async function renderFrontpage(main) {
-  main.append(await getData());
+  const dataOne = await getData();
+  addSortbuttons(sortbuttons);
+  DisplayAllEvents(dataOne, main);
 }
 
 export {
-  fetchAndRenderEvents, renderFrontpage, createSearchInput, DisplayAllEvents,
+  fetchAndRenderEvents, renderFrontpage,
 };
+
+// log('\n\n built-in sort method');
+// log(people.sort()); // [Object object]
+
+// log('\n\n sort by name');
+// log(people.sort(byName));
+
+// log('\n\n sort by id');
+// log(people.sort(byId));
+
+// log('\n\n sort by date');
+// log(people.sort(byDate));
