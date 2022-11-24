@@ -36,3 +36,37 @@ export function empty(element) {
     element.removeChild(element.firstChild);
   }
 }
+
+export function byName(a, b) {
+  // alphabetically by name
+  if (a.name > b.name) {
+    return 1;
+  } if (b.name > a.name) {
+    return -1;
+  }
+  return 0;
+}
+
+export function byId(a, b) {
+  // numerically by id
+  return parseInt(a.id) - parseInt(b.id);
+}
+
+export function byDate(a, b) {
+  // chronologically by year, month, then day
+  return new Date(a.dob).valueOf() - new Date(b.dob).valueOf(); // timestamps
+}
+
+export function byBirthday(a, b) {
+  // by month and then by day
+  const d1 = new Date(a.dob); // 1993-02-15T00:00:00Z =>   1993-02-14T20:00:00EST
+  const d2 = new Date(b.dob);
+  log(d1.getDate(), d1.getUTCDate(), d1.getMonth(), d1.getUTCMonth());
+  if (d1.getUTCMonth() > d2.getUTCMonth()) {
+    return 1;
+  } if (d1.getUTCMonth() < d2.getUTCMonth()) {
+    return -1;
+  }
+  // same month
+  return d1.getUTCDate() - d2.getUTCDate();
+}

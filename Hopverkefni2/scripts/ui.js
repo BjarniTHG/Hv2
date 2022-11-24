@@ -1,5 +1,6 @@
-import { empty, el } from './helpers';
-
+import {
+  empty, el, byName, byBirthday, byDate, byId,
+} from './helpers';
 
 async function getData() {
   let filearray;
@@ -30,8 +31,8 @@ async function DisplayAllEvents(data, main) {
 async function DisplayOneEvent(data, main, id) {
   console.log(data[0].location[0]);
   for (let i = 0; i < data.length; i++) {
+    const source = await getImage();
     if (data[i].id == id) {
-      const source =await getImage();
       main.append(el('a', { }, el('img', { src: source, class: 'clickedimg' })));
       main.append(el('p', {}, data[i].language.is.title));
       main.append(el('p', {}, data[i].language.is.text));
@@ -62,13 +63,32 @@ async function fetchAndRenderEvents(id, main) {
   const data = await getData();
   DisplayOneEvent(data, main, id);
 }
+const sortbuttons = document.querySelector('.sortbuttons');
+
+function addSortbuttons(div) {
+  div.append(el('button', { class: 'sortbutton', id: 'sortbyname' }, 'Raða eftir nafni'));
+  div.append(el('button', { class: 'sortbutton', id: 'sortbydate' }, 'Raða eftri dagsetningu'));
+  div.append(el('button', { class: 'sortbutton', id: 'sortbybirthday' }, 'Raða eftir fæðingardag'));
+}
 
 async function renderFrontpage(main) {
   const dataOne = await getData();
+  addSortbuttons(sortbuttons);
   DisplayAllEvents(dataOne, main);
 }
 
 export {
-  fetchAndRenderEvents, renderFrontpage, DisplayAllEvents,
+  fetchAndRenderEvents, renderFrontpage,
 };
 
+// log('\n\n built-in sort method');
+// log(people.sort()); // [Object object]
+
+// log('\n\n sort by name');
+// log(people.sort(byName));
+
+// log('\n\n sort by id');
+// log(people.sort(byId));
+
+// log('\n\n sort by date');
+// log(people.sort(byDate));
