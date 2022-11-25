@@ -1,5 +1,5 @@
 import './style.css';
-import './data/events.json';
+import './public/data/events.json';
 import { empty } from './scripts/helpers';
 import { fetchAndRenderEvents, renderFrontpage } from './scripts/ui';
 
