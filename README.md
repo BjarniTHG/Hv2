@@ -4,6 +4,8 @@ Höfundar verkefnis eru:
   **Egill Askur** -eae28@hi.is
   
   **Sandesh Kunwar** -sak38@hi.is
+  
+  
   HÓPVERKEFNI 2 HÓPNÚMER -3 Á CANVAS
   
 
