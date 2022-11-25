@@ -19,12 +19,13 @@ data[i].language.is.text */
 async function route() {
   const params = new URLSearchParams(window.location.search);
   const id = params.get('id');
+  console.log(id + "hallo");
   if (id) {
-    fetchAndRenderEvents(id, main);
+    await fetchAndRenderEvents(id, main);
 
     // console.log("your EVENT route is working");
   } else {
-    renderFrontpage(main);
+    await renderFrontpage(main);
     // console.log('your MAIN route is working');
   }
 }
@@ -32,9 +33,9 @@ async function route() {
 /**
  * Bregst við því þegar við notum vafra til að fara til baka eða áfram.
  */
-window.onpopstate = () => {
-  empty(main);
-  route();
+window.onpopstate = async () => {
+  //empty(main);
+  await route();
 };
 // Athugum í byrjun hvað eigi að birta.
 route();
