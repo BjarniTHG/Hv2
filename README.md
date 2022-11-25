@@ -4,6 +4,7 @@ Höfundar verkefnis eru:
   **Egill Askur** -eae28@hi.is
   
   **Sandesh Kunwar** -sak38@hi.is
+  HÓPVERKEFNI 2 HÓPNÚMER -3 Á CANVAS
   
 
 Verkefnið skal keyra með npm run dev. Sass er mjög einfaldlega skipulagt. Fontar settir í eitt skjal, rest gert í layout.
