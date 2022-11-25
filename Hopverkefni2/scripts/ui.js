@@ -8,7 +8,7 @@ const wrapper = document.querySelector('.wrapper');
 async function getData() {
   let filearray;
   try {
-    filearray = await fetch('./public/data/events.json');
+    filearray = await fetch('./data/events.json');
   } catch (error) {
     console.error('error');
   }
