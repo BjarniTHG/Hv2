@@ -1,9 +1,9 @@
 Höfundar verkefnis eru:
-  **Bjarni Þór Guðmundsson** 
+  **Bjarni Þór Guðmundsson**  -btg7@hi.is
   
-  **Egill Askur**
+  **Egill Askur** -eae28@hi.is
   
-  **Sandesh**
+  **Sandesh Kunwar** -sak38@hi.is
   
 
 Verkefnið skal keyra með npm run dev. Sass er mjög einfaldlega skipulagt. Fontar settir í eitt skjal, rest gert í layout.
