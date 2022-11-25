@@ -1,5 +1,5 @@
 Höfundar verkefnis eru:
-  **Bjarni Þór Guðmundsson**
+  **Bjarni Þór Guðmundsson** 
   **Egill Askur**
   **Sandesh**
 
