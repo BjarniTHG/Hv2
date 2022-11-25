@@ -2,7 +2,7 @@
   --font-family-headings: 'Lobster';
   --font-family-base: 'Exo', system-ui;
 
-  background-color: #212020;
+  background-color: #0f0e17;
   color: #ffff;
   color-scheme: light dark;
   font-size: 16px;
@@ -19,39 +19,65 @@
   width: 100vw;
 }
 
+.layout{
+  display: flex;
+  flex-direction: column;
+}
+
 .layout__header {
   align-items: center;
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
   margin: 0 auto;
+  margin-bottom: 4px;
   padding: 0 1rem;
   width: 100%;
-  position: fixed;
-  top: 0;
   a{
     text-decoration: none;
     font-family: var(--font-family-headings);
-    color: rgb(0, 216, 0);
+    color: #fffffe;
   }
   a: visited{
-    color: rgb(0, 186, 0);
+    color: #ffffff;
   }
-  background-color: #184100;
 }
 
 .layout__main{
   display: flex;
   flex-direction: column;
   font-family: var(--font-family-base);
-  
 }
 
 .storaDiv{
   display: flex;
   flex-direction: row;
+  div{
+    padding: 5px;
+    margin-left: 2vw;
+  }
 }
 
 #map {
   height: 50vh;
+}
+
+button{
+  background-color: #89e6ab;
+  padding: 5px;
+  border: 0px;
+  margin-left: 2vw;
+  font-family: var(--font-family-base);
+  color: #0f0e17;
+  border-radius: 4px;
+  opacity: 0.5;
+}
+
+button:hover{
+  opacity: 1;
+  transition: all 400ms ease;
+}
+
+p{
+  color: #a7a9be;
 }

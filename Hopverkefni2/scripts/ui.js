@@ -1,6 +1,9 @@
 import {
-  empty, el, byName, byBirthday, byDate, byId,
+  empty, el, byName, byDate,
 } from './helpers';
+
+const sortbuttons = document.querySelector('.sortbuttons');
+const wrapper = document.querySelector('.wrapper');
 
 async function getData() {
   let filearray;
@@ -19,6 +22,8 @@ async function getImage() {
 }
 
 async function DisplayAllEvents(data, main) {
+  empty(wrapper);
+  //main.append(wrapper);
   for (let i = 0; i < data.length; i++) {
     const source = await getImage();
     let aDiv = el('div', {});
@@ -29,7 +34,7 @@ async function DisplayAllEvents(data, main) {
     pDiv.append(el('p', {}, data[i].language.is.place));
     pDiv.append(el('p', {}, `${(data[i].start).slice(11, 16)}-${(data[i].end).slice(11, 16)}`));
     storaDiv.append(aDiv, pDiv);
-    main.append(storaDiv);
+    wrapper.append(storaDiv);
   }
 }
 
@@ -68,32 +73,22 @@ async function fetchAndRenderEvents(id, main) {
   const data = await getData();
   DisplayOneEvent(data, main, id);
 }
-const sortbuttons = document.querySelector('.sortbuttons');
 
 function addSortbuttons(div) {
   div.append(el('button', { class: 'sortbutton', id: 'sortbyname' }, 'Raða eftir nafni'));
-  div.append(el('button', { class: 'sortbutton', id: 'sortbydate' }, 'Raða eftir dagsetningu'));
-  div.append(el('button', { class: 'sortbutton', id: 'sortbybirthday' }, 'Raða eftir fæðingardag'));
+  div.append(el('button', { class: 'sortbutton', id: 'sortbydate' }, 'Raða eftir tíma'));
 }
 
 function sortfunctionalities(main) {
   const sortbyname = document.querySelector('#sortbyname');
   const sortbydate = document.querySelector('#sortbydate');
-  const sortbybirthday = document.querySelector('#sortbybirthday');
   sortbyname.addEventListener('click', async () => {
     const data = await getData();
-    empty(main);
-    DisplayAllEvents(byName(data), main);
+    DisplayAllEvents(data.sort(byName), main);
   });
   sortbydate.addEventListener('click', async () => {
     const data = await getData();
-    empty(main);
-    DisplayAllEvents(byDate(data), main);
-  });
-  sortbybirthday.addEventListener('click', async () => {
-    const data = await getData();
-    empty(main);
-    DisplayAllEvents(byBirthday(data), main);
+    DisplayAllEvents(data.sort(byDate), main);
   });
 }
 
@@ -102,20 +97,9 @@ async function renderFrontpage(main) {
   DisplayAllEvents(dataOne, main);
   addSortbuttons(sortbuttons);
   sortfunctionalities(main);
+  
 }
 
 export {
   fetchAndRenderEvents, renderFrontpage,
 };
-
-// log('\n\n built-in sort method');
-// log(people.sort()); // [Object object]
-
-// log('\n\n sort by name');
-// log(people.sort(byName));
-
-// log('\n\n sort by id');
-// log(people.sort(byId));
-
-// log('\n\n sort by date');
-// log(people.sort(byDate));

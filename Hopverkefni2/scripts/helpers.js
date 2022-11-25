@@ -38,10 +38,12 @@ export function empty(element) {
 }
 
 export function byName(a, b) {
+  const aName = a.language.is.title;
+  const bName = b.language.is.title;
   // alphabetically by name
-  if (a.name > b.name) {
+  if (aName > bName) {
     return 1;
-  } if (b.name > a.name) {
+  } if (bName > aName) {
     return -1;
   }
   return 0;
@@ -54,19 +56,6 @@ export function byId(a, b) {
 
 export function byDate(a, b) {
   // chronologically by year, month, then day
-  return new Date(a.dob).valueOf() - new Date(b.dob).valueOf(); // timestamps
-}
-
-export function byBirthday(a, b) {
-  // by month and then by day
-  const d1 = new Date(a.dob); // 1993-02-15T00:00:00Z =>   1993-02-14T20:00:00EST
-  const d2 = new Date(b.dob);
-  log(d1.getDate(), d1.getUTCDate(), d1.getMonth(), d1.getUTCMonth());
-  if (d1.getUTCMonth() > d2.getUTCMonth()) {
-    return 1;
-  } if (d1.getUTCMonth() < d2.getUTCMonth()) {
-    return -1;
-  }
-  // same month
-  return d1.getUTCDate() - d2.getUTCDate();
+  console.log(a);
+  return new Date(a.start).valueOf() - new Date(b.start).valueOf(); // timestamps
 }
