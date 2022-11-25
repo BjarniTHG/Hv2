@@ -51,11 +51,10 @@ export function byName(a, b) {
 
 export function byId(a, b) {
   // numerically by id
-  return parseInt(a.id) - parseInt(b.id);
+  return parseInt(a.id, 10) - parseInt(b.id, 10);
 }
 
 export function byDate(a, b) {
   // chronologically by year, month, then day
-  console.log(a);
   return new Date(a.start).valueOf() - new Date(b.start).valueOf(); // timestamps
 }

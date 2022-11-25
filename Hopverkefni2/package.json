@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "lint": "eslint ./**/*.js",
+    "lint": "eslint scripts/**/*.js",
     "prettier": "prettier --write .",
     "lintscss": "stylelint style.scss ./**/*.scss",
     "sass-watch": "sass --watch style.scss style.css"

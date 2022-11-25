@@ -10,7 +10,7 @@ async function getData() {
   try {
     filearray = await fetch('./data/events.json');
   } catch (error) {
-    console.warn('error');
+    console.error('error');
   }
   return filearray.json();
 }
@@ -21,14 +21,13 @@ async function getImage() {
   return source;
 }
 
-async function DisplayAllEvents(data, main) {
+async function DisplayAllEvents(data) {
   empty(wrapper);
-  //main.append(wrapper);
-  for (let i = 0; i < data.length; i++) {
+  for (let i = 0; i < data.length; i += 1) {
     const source = await getImage();
-    let aDiv = el('div', {});
-    let pDiv = el('div', {});
-    let storaDiv = el('div', {class: 'storaDiv'});
+    const aDiv = el('div', {});
+    const pDiv = el('div', {});
+    const storaDiv = el('div', { class: 'storaDiv' });
     aDiv.append(el('a', { href: `/?id=${data[i].id}`, class: 'linkhref' }, el('img', { src: source, class: 'imgresponsive' })));
     pDiv.append(el('p', {}, data[i].language.is.title));
     pDiv.append(el('p', {}, data[i].language.is.place));
@@ -39,10 +38,9 @@ async function DisplayAllEvents(data, main) {
 }
 
 async function DisplayOneEvent(data, main, id) {
-  console.log(data[0].location[0]);
-  for (let i = 0; i < data.length; i++) {
+  for (let i = 0; i < data.length; i += 1) {
     const source = await getImage();
-    if (data[i].id == id) {
+    if (data[i].id === id) {
       main.append(el('a', { }, el('img', { src: source, class: 'clickedimg' })));
       main.append(el('p', {}, data[i].language.is.title));
       main.append(el('p', {}, data[i].language.is.text));
@@ -97,7 +95,6 @@ async function renderFrontpage(main) {
   DisplayAllEvents(dataOne, main);
   addSortbuttons(sortbuttons);
   sortfunctionalities(main);
-  
 }
 
 export {
