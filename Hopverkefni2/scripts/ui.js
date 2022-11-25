@@ -71,10 +71,32 @@ function addSortbuttons(div) {
   div.append(el('button', { class: 'sortbutton', id: 'sortbybirthday' }, 'Raða eftir fæðingardag'));
 }
 
+function sortfunctionalities(main) {
+  const sortbyname = document.querySelector('#sortbyname');
+  const sortbydate = document.querySelector('#sortbydate');
+  const sortbybirthday = document.querySelector('#sortbybirthday');
+  sortbyname.addEventListener('click', async () => {
+    const data = await getData();
+    empty(main);
+    DisplayAllEvents(byName(data), main);
+  });
+  sortbydate.addEventListener('click', async () => {
+    const data = await getData();
+    empty(main);
+    DisplayAllEvents(byDate(data), main);
+  });
+  sortbybirthday.addEventListener('click', async () => {
+    const data = await getData();
+    empty(main);
+    DisplayAllEvents(byBirthday(data), main);
+  });
+}
+
 async function renderFrontpage(main) {
   const dataOne = await getData();
-  addSortbuttons(sortbuttons);
   DisplayAllEvents(dataOne, main);
+  addSortbuttons(sortbuttons);
+  sortfunctionalities(main);
 }
 
 export {
