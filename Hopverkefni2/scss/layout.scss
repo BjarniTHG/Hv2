@@ -19,15 +19,37 @@
   width: 100vw;
 }
 
-.main {
+.layout__header {
   align-items: center;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  flex-direction: row;
+  justify-content: space-evenly;
   margin: 0 auto;
-  max-width: 1200px;
   padding: 0 1rem;
   width: 100%;
+  position: fixed;
+  top: 0;
+  a{
+    text-decoration: none;
+    font-family: var(--font-family-headings);
+    color: rgb(0, 216, 0);
+  }
+  a: visited{
+    color: rgb(0, 186, 0);
+  }
+  background-color: #184100;
+}
+
+.layout__main{
+  display: flex;
+  flex-direction: column;
+  font-family: var(--font-family-base);
+  
+}
+
+.storaDiv{
+  display: flex;
+  flex-direction: row;
 }
 
 #map {

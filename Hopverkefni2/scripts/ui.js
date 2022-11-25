@@ -21,10 +21,15 @@ async function getImage() {
 async function DisplayAllEvents(data, main) {
   for (let i = 0; i < data.length; i++) {
     const source = await getImage();
-    main.append(el('a', { href: `/?id=${data[i].id}`, class: 'linkhref' }, el('img', { src: source, class: 'imgresponsive' })));
-    main.append(el('p', {}, data[i].language.is.title));
-    main.append(el('p', {}, data[i].language.is.place));
-    main.append(el('p', {}, `${(data[i].start).slice(11, 16)}-${(data[i].end).slice(11, 16)}`));
+    let aDiv = el('div', {});
+    let pDiv = el('div', {});
+    let storaDiv = el('div', {class: 'storaDiv'});
+    aDiv.append(el('a', { href: `/?id=${data[i].id}`, class: 'linkhref' }, el('img', { src: source, class: 'imgresponsive' })));
+    pDiv.append(el('p', {}, data[i].language.is.title));
+    pDiv.append(el('p', {}, data[i].language.is.place));
+    pDiv.append(el('p', {}, `${(data[i].start).slice(11, 16)}-${(data[i].end).slice(11, 16)}`));
+    storaDiv.append(aDiv, pDiv);
+    main.append(storaDiv);
   }
 }
 
@@ -67,7 +72,7 @@ const sortbuttons = document.querySelector('.sortbuttons');
 
 function addSortbuttons(div) {
   div.append(el('button', { class: 'sortbutton', id: 'sortbyname' }, 'Raða eftir nafni'));
-  div.append(el('button', { class: 'sortbutton', id: 'sortbydate' }, 'Raða eftri dagsetningu'));
+  div.append(el('button', { class: 'sortbutton', id: 'sortbydate' }, 'Raða eftir dagsetningu'));
   div.append(el('button', { class: 'sortbutton', id: 'sortbybirthday' }, 'Raða eftir fæðingardag'));
 }
 
